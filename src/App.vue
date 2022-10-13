@@ -1,11 +1,30 @@
 <script setup>
-import ColorBox from "./components/ColorBox.vue";
+import ColorGrid from "./components/ColorGrid.vue";
+import { useColorStore } from "./stores/colors";
+import ColorsPalette from "./components/ColorsPalette.vue";
 
-const foregrounds = ["#E9E9E9", "#FF2020", "#ECFF", "#2BF"];
-const backgrounds = ["#111", "#222", "#333", "#444"];
+const colorStore = useColorStore();
 </script>
 
 <template>
+  <ColorsPalette
+    :colorList="colorStore.backgroundColors"
+    :defaultColor="'#E8E8E8'"
+  />
+  <ColorsPalette
+    :colorList="colorStore.foregroundColors"
+    :defaultColor="'#151515'"
+  />
+  <ColorGrid />
+  <!-- 
+  <div v-for="color in backgrounds" :key="color">
+    {{ color }}
+    <input type="color" id="favColor" v-model="color.value" />
+    <input type="text" id="colorCode" v-model="color.value" />
+    <button @click="removeBackground(color)">remove me</button>
+    <button @click="copyBackground(color.value)"><file-copy-fill /></button>
+
+
   <div class="grid">
     <div
       v-for="backgroundColor in backgrounds"
@@ -15,12 +34,12 @@ const backgrounds = ["#111", "#222", "#333", "#444"];
       <ColorBox
         v-for="foregroundColor in foregrounds"
         :key="foregroundColor"
-        :background="backgroundColor"
+        :background="backgroundColor.value"
         :foreground="foregroundColor"
         class="box"
       />
     </div>
-  </div>
+  </div> -->
 </template>
 
 <style scoped>

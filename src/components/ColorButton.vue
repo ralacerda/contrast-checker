@@ -1,30 +1,24 @@
 <script setup>
+import { ref, watch } from "vue";
+import ColorInput from "vue-color-input";
 // eslint-disable-next-line no-unused-vars
 const props = defineProps(["currentColor"]);
 // eslint-disable-next-line no-unused-vars
 const emit = defineEmits(["delete", "duplicate", "change"]);
+
+const localColor = ref(props.currentColor.value);
+
+watch(localColor, (newColor) => {
+  emit("change", props.currentColor, newColor);
+});
 </script>
 
 <template>
   <div>
-    <div class="box">
-      <input
-        class="color-picker"
-        type="color"
-        :value="props.currentColor.value"
-        @input="
-          (event) => $emit('change', props.currentColor, event.target.value)
-        "
-      />
-    </div>
+    <color-input v-model="localColor" format="hex" disable-text-inputs />
+    <input type="text" v-model="localColor" />
     <button @click="$emit('delete', props.currentColor)">Delete</button>
     <button @click="$emit('duplicate', props.currentColor)">Duplicate</button>
-    <input
-      :value="props.currentColor.value"
-      @input="
-        (event) => $emit('change', props.currentColor, event.target.value)
-      "
-    />
   </div>
 </template>
 

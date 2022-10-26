@@ -1,9 +1,11 @@
 <script setup>
+import { hex } from "wcag-contrast";
+
 const props = defineProps(["background", "foreground"]);
 </script>
 
 <template>
-  <div>TEXT</div>
+  <div>{{ hex(background, foreground).toFixed(2) }}</div>
 </template>
 
 <style scoped>

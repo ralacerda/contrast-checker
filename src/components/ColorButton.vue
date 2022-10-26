@@ -1,16 +1,27 @@
 <script setup>
 import ColorInput from "vue-color-input";
 
-const props = defineProps(["color"]);
-defineEmits(["update:color"]);
+defineProps(["modelValue"]);
+defineEmits(["update:modelValue", "delete"]);
+
+// const handleUpdate = (x) => {
+//   emit("update:modelValue", x);
+// };
 </script>
 
 <template>
-  <ColorInput
-    :value="color"
-    @input="$emit('update:color', $event.target.value)"
-  />
-  {{ props.color }}
+  <div>
+    <ColorInput
+      :modelValue="modelValue"
+      @update:modelValue="(x) => $emit('update:modelValue', x)"
+      format="hex string" />
+
+    <input
+      :value="modelValue"
+      @input="$emit('update:modelValue', $event.target.value)" />
+
+    <button @click="$emit('delete')">Del</button>
+  </div>
 </template>
 
 <style></style>

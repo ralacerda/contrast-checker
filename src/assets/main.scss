@@ -1,5 +1,10 @@
-*,
-*::after,
-*::before {
-  box-sizing: border-box;
+@import "../../node_modules/bulma/bulma.sass";
+
+// We need to remove Bulma styling for this box.
+// It's part of the color pick and not a Bulma component
+.color-input .box {
+  background-color: unset;
+  box-shadow: unset;
+  color: unset;
+  padding: unset;
 }

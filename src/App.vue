@@ -7,11 +7,11 @@ import { ref } from "vue";
 const foregroundColors = useStorage("foregroundColors", ["#FFF", "#e4e4e4"]);
 const backgroundColors = useStorage("backgroundColors", []);
 
-const showShadows = ref(true);
-const showBorders = ref(false);
-const showPreview = ref(true);
-const enhancedContrast = ref(false);
-const showText = ref(true);
+const showShadows = useStorage("optionShowShadows", ref(true));
+const showBorders = useStorage("optionShowBorders", ref(false));
+const showPreview = useStorage("optionShowPreview", ref(true));
+const enhancedContrast = useStorage("optionEnhancedContrast", ref(false));
+const showText = useStorage("optionShowText", ref(true));
 
 const options = {
   showShadows,

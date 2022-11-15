@@ -25,8 +25,8 @@ function shadowColor(contrast) {
 </script>
 
 <template>
-  <div class="bigger-box">
-    <div class="combination-box">
+  <div class="box-wrapper">
+    <div class="color-box">
       {{ hex(background, foreground).toFixed(2) }}
     </div>
     {{ passTest(hex(background, foreground)) }}
@@ -34,7 +34,7 @@ function shadowColor(contrast) {
 </template>
 
 <style scoped>
-.bigger-box {
+.box-wrapper {
   width: 120px;
   height: 80px;
   display: grid;
@@ -45,7 +45,7 @@ function shadowColor(contrast) {
   box-shadow: 0px 0px 10px v-bind("shadowColor(hex(background, foreground))");
 }
 
-.combination-box {
+.color-box {
   display: grid;
   place-items: center;
   font-size: 20px;

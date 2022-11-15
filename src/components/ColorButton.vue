@@ -19,5 +19,3 @@ defineEmits(["update:modelValue", "delete"]);
     <button @click="$emit('delete')">Del</button>
   </div>
 </template>
-
-<style></style>

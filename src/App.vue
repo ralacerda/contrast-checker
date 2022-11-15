@@ -65,10 +65,3 @@ const options = {
     </template>
   </div>
 </template>
-
-<style scoped>
-.background-buttons,
-.foreground-buttons {
-  display: flex;
-}
-</style>

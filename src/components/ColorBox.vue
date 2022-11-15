@@ -2,6 +2,26 @@
 import { hex } from "wcag-contrast";
 
 const props = defineProps(["background", "foreground"]);
+
+function passTest(contrast) {
+  if (contrast > 4.5) {
+    return "Pass";
+  } else if (contrast > 3) {
+    return "Large Text";
+  } else {
+    return "Fail";
+  }
+}
+
+function shadowColor(contrast) {
+  if (contrast > 4.5) {
+    return "green";
+  } else if (contrast > 3) {
+    return "yellow";
+  } else {
+    return "red";
+  }
+}
 </script>
 
 <template>
@@ -9,11 +29,11 @@ const props = defineProps(["background", "foreground"]);
     <div class="combination-box">
       {{ hex(background, foreground).toFixed(2) }}
     </div>
+    {{ passTest(hex(background, foreground)) }}
   </div>
 </template>
 
 <style scoped>
-div {
 .bigger-box {
   width: 120px;
   height: 80px;
@@ -22,6 +42,7 @@ div {
   border: solid 1px black;
   border-radius: 4px;
   margin: 10px;
+  box-shadow: 0px 0px 10px v-bind("shadowColor(hex(background, foreground))");
 }
 
 .combination-box {

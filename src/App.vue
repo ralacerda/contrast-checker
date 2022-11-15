@@ -2,12 +2,38 @@
 import { useStorage } from "@vueuse/core";
 import ColorBox from "./components/ColorBox.vue";
 import ColorButton from "./components/ColorButton.vue";
+import { ref } from "vue";
 
 const foregroundColors = useStorage("foregroundColors", ["#FFF", "#e4e4e4"]);
 const backgroundColors = useStorage("backgroundColors", []);
+
+const showShadows = ref(true);
+const showBorders = ref(false);
+const showPreview = ref(true);
+const enhancedContrast = ref(false);
+const showText = ref(true);
+
+const options = {
+  showShadows,
+  enhancedContrast,
+  showBorders,
+  showPreview,
+  showText,
+};
 </script>
 
 <template>
+  <input type="checkbox" id="switch" class="checkbox" v-model="showShadows" />
+  <input type="checkbox" id="switch" class="checkbox" v-model="showBorders" />
+  <input type="checkbox" id="switch" class="checkbox" v-model="showPreview" />
+  <input type="checkbox" id="switch" class="checkbox" v-model="showText" />
+
+  <input
+    type="checkbox"
+    id="switch"
+    class="checkbox"
+    v-model="enhancedContrast" />
+
   <ColorButton
     v-for="(color, index) in backgroundColors"
     :key="index"
@@ -31,7 +57,10 @@ const backgroundColors = useStorage("backgroundColors", []);
     <template v-for="(foreground, index) in foregroundColors" :key="index">
       {{ foreground }}
       <template v-for="(background, index) in backgroundColors" :key="index">
-        <ColorBox :background="background" :foreground="foreground" />
+        <ColorBox
+          :background="background"
+          :foreground="foreground"
+          :options="options" />
       </template>
     </template>
   </div>

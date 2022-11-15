@@ -3,10 +3,6 @@ import ColorInput from "vue-color-input";
 
 defineProps(["modelValue"]);
 defineEmits(["update:modelValue", "delete"]);
-
-// const handleUpdate = (x) => {
-//   emit("update:modelValue", x);
-// };
 </script>
 
 <template>

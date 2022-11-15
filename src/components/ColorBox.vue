@@ -26,16 +26,25 @@ function shadowColor(contrastResult) {
 }
 
 function borderStyle(contrastResult) {
-  if (!props.options.showBorders.value) {
-    return "1px solid black";
+  if (!props.options.showBorders.value || contrastResult == "Pass") {
+    return "solid";
+  } else {
+    return contrastResult == "Large Text" ? "dashed" : "dotted";
   }
-  switch (contrastResult) {
-    case "Pass":
-      return "3px solid green";
-    case "Large Text":
-      return "2px dashed orange";
-    case "Fail":
-      return "1px dotted red";
+}
+
+function borderColor(contrastResult) {
+  if (!props.options.showShadows.value) {
+    return "black";
+  } else {
+    switch (contrastResult) {
+      case "Pass":
+        return "green";
+      case "Large Text":
+        return "orange";
+      case "Fail":
+        return "red";
+    }
   }
 }
 </script>
@@ -59,7 +68,13 @@ function borderStyle(contrastResult) {
   height: 80px;
   display: grid;
   place-items: center;
-  border: v-bind("borderStyle(contrastTest(hex(background, foreground)))");
+  border-width: 1px;
+  border-style: v-bind(
+    "borderStyle(contrastTest(hex(background, foreground)))"
+  );
+  border-color: v-bind(
+    "borderColor(contrastTest(hex(background, foreground)))"
+  );
   border-radius: 4px;
   margin: 10px;
   box-shadow: v-bind("shadowColor(contrastTest(hex(background, foreground)))");

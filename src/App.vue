@@ -113,12 +113,12 @@ const options = useStorage(
 .button-row {
   display: flex;
   gap: 1rem;
-  align-items: center;
 }
 
 .button-row .new-color {
   height: 8ch;
   width: 8ch;
+  margin-top: 24px;
 }
 
 .display-options {

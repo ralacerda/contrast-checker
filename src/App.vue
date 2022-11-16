@@ -132,4 +132,8 @@ const options = useStorage(
 .display-options .checkbox {
   max-width: 30ch;
 }
+
+.block + .block {
+  border-top: solid 1px #00000010;
+}
 </style>

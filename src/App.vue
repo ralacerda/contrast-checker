@@ -79,9 +79,17 @@ const options = useStorage(
   </div>
 
   <div class="block">
+    <h2 class="title is-4 mb-2 mt-4">Result Matrix</h2>
     <div class="color-grid">
+      <div class="color-grid-row has-text-centered is-uppercase">
+        <span />
+        <template v-for="(foreground, index) in foregroundColors" :key="index">
+          <span>{{ foreground }}</span>
+        </template>
+      </div>
       <template v-for="(background, index) in backgroundColors" :key="index">
         <div class="color-grid-row">
+          <span class="has-text-centered is-uppercase"> {{ background }} </span>
           <template
             v-for="(foreground, index) in foregroundColors"
             :key="index">
@@ -100,7 +108,8 @@ const options = useStorage(
 .color-grid-row {
   display: grid;
   grid-auto-flow: column;
-  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  align-items: center;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
 }
 
 .button-row {

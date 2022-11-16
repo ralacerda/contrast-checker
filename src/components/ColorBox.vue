@@ -62,8 +62,6 @@ function borderColor(contrastResult) {
 
 <style scoped>
 .box-wrapper {
-  width: 120px;
-  height: 80px;
   display: grid;
   place-items: center;
   border-width: 1px;
@@ -75,6 +73,7 @@ function borderColor(contrastResult) {
   );
   border-radius: 4px;
   margin: 10px;
+  padding: 6px;
   box-shadow: v-bind("shadowColor(contrastTest(hex(background, foreground)))");
 }
 
@@ -84,6 +83,7 @@ function borderColor(contrastResult) {
   font-size: 20px;
   height: 60px;
   width: 60px;
+  border-radius: 6px;
 }
 
 .color-preview {

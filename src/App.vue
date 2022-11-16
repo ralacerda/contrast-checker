@@ -2,6 +2,7 @@
 import { useStorage } from "@vueuse/core";
 import ColorBox from "./components/ColorBox.vue";
 import ColorButton from "./components/ColorButton.vue";
+import NewColor from "./components/NewColor.vue";
 import { reactive } from "vue";
 
 const foregroundColors = useStorage("foregroundColors", ["#FFF", "#e4e4e4"]);
@@ -60,11 +61,7 @@ const options = useStorage(
         :modelValue="backgroundColors[index]"
         @update:modelValue="(x) => (backgroundColors[index] = x)"
         @delete="backgroundColors.splice(index, 1)" />
-      <button
-        class="new-color button"
-        @click="backgroundColors.push('#ffffff')">
-        +
-      </button>
+      <NewColor @click="backgroundColors.push('#FFFFFF')" />
     </div>
 
     <div class="block">
@@ -76,11 +73,7 @@ const options = useStorage(
           :modelValue="foregroundColors[index]"
           @update:modelValue="(x) => (foregroundColors[index] = x)"
           @delete="foregroundColors.splice(index, 1)" />
-        <button
-          class="new-color button"
-          @click="foregroundColors.push('#000000')">
-          +
-        </button>
+        <NewColor @click="foregroundColors.push('#000000')" />
       </div>
     </div>
   </div>

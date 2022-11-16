@@ -40,7 +40,7 @@ defineEmits(["update:modelValue", "delete"]);
   width: 100%;
 }
 
-.color-input .box {
+.color-button .color-input .box {
   height: 100%;
   width: 100%;
   border-radius: 3px;
@@ -48,8 +48,6 @@ defineEmits(["update:modelValue", "delete"]);
 }
 
 .color-input .color::after {
-  height: 100% - 2px;
-  width: 100% - 2px;
   border: solid 1px #333f4820;
   content: "";
   position: absolute;

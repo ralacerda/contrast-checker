@@ -9,6 +9,10 @@
   padding: unset;
 }
 
+label {
+  user-select: none;
+}
+
 #app {
   background-color: #fafafa;
   min-height: 100vh;

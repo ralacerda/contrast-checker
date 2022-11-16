@@ -4,7 +4,7 @@ import { hex } from "wcag-contrast";
 const props = defineProps(["background", "foreground", "options"]);
 
 function contrastTest(contrast) {
-  if (props.options.enhancedContrast.value) {
+  if (props.options.enhancedContrast) {
     return contrast > 7 ? "Pass" : contrast > 4.5 ? "Large Text" : "Fail";
   } else {
     return contrast > 4.5 ? "Pass" : contrast > 3 ? "Large Text" : "Fail";
@@ -12,7 +12,7 @@ function contrastTest(contrast) {
 }
 
 function shadowColor(contrastResult) {
-  if (!props.options.showShadows.value) {
+  if (!props.options.showShadows) {
     return "0px 0px 20px #00000020";
   }
   switch (contrastResult) {
@@ -26,7 +26,7 @@ function shadowColor(contrastResult) {
 }
 
 function borderStyle(contrastResult) {
-  if (!props.options.showBorders.value || contrastResult == "Pass") {
+  if (!props.options.showBorders || contrastResult == "Pass") {
     return "solid";
   } else {
     return contrastResult == "Large Text" ? "dashed" : "dotted";
@@ -34,7 +34,7 @@ function borderStyle(contrastResult) {
 }
 
 function borderColor(contrastResult) {
-  if (!props.options.showShadows.value) {
+  if (!props.options.showShadows) {
     return "black";
   } else {
     switch (contrastResult) {
@@ -51,12 +51,10 @@ function borderColor(contrastResult) {
 
 <template>
   <div class="box-wrapper">
-    <div
-      class="color-box"
-      :class="{ 'color-preview': options.showPreview.value }">
+    <div class="color-box" :class="{ 'color-preview': options.showPreview }">
       {{ hex(background, foreground).toFixed(2) }}
     </div>
-    <div v-if="options.showText.value">
+    <div v-if="options.showText">
       {{ contrastTest(hex(background, foreground)) }}
     </div>
   </div>

@@ -20,65 +20,114 @@ const options = useStorage(
 </script>
 
 <template>
-  <div class="box">
-    <label class="checkbox">
-      <input type="checkbox" v-model="options.showShadows" />
-      Show colored shadows
-    </label>
+  <div class="block">
+    <h1 class="title is-1">Multiple Colors Contrast Checker</h1>
 
-    <label class="checkbox">
-      <input type="checkbox" v-model="options.showBorders" />
-      Show different border styles
-    </label>
+    <div class="block display-options">
+      <label class="checkbox">
+        <input type="checkbox" v-model="options.showShadows" />
+        Colored shadows
+      </label>
 
-    <label class="checkbox">
-      <input type="checkbox" v-model="options.showPreview" />
-      Show colors preview
-    </label>
+      <label class="checkbox">
+        <input type="checkbox" v-model="options.showBorders" />
+        Border styles
+      </label>
 
-    <label class="checkbox">
-      <input type="checkbox" v-model="options.showText" />
-      Show result in text
-    </label>
+      <label class="checkbox">
+        <input type="checkbox" v-model="options.showPreview" />
+        Colors preview
+      </label>
 
-    <label class="checkbox">
-      <input type="checkbox" v-model="options.enhancedContrast" />
-      Test enhanced contrast level
-    </label>
+      <label class="checkbox">
+        <input type="checkbox" v-model="options.showText" />
+        Result as text
+      </label>
+
+      <label class="checkbox">
+        <input type="checkbox" v-model="options.enhancedContrast" />
+        Enhanced contrast level
+      </label>
+    </div>
   </div>
 
-  <div class="box">
-    <ColorButton
-      v-for="(color, index) in backgroundColors"
-      :key="index"
-      :modelValue="backgroundColors[index]"
-      @update:modelValue="(x) => (backgroundColors[index] = x)"
-      @delete="backgroundColors.splice(index, 1)" />
-    <button @click="backgroundColors.push('#fff')">new color</button>
+  <div class="block">
+    <h2 class="title is-4 mb-2 mt-4">Backgrounds</h2>
+    <div class="button-row block">
+      <ColorButton
+        v-for="(color, index) in backgroundColors"
+        :key="index"
+        :modelValue="backgroundColors[index]"
+        @update:modelValue="(x) => (backgroundColors[index] = x)"
+        @delete="backgroundColors.splice(index, 1)" />
+      <button
+        class="new-color button"
+        @click="backgroundColors.push('#ffffff')">
+        +
+      </button>
+    </div>
 
-    <ColorButton
-      v-for="(color, index) in foregroundColors"
-      :key="index"
-      :modelValue="foregroundColors[index]"
-      @update:modelValue="(x) => (foregroundColors[index] = x)"
-      @delete="foregroundColors.splice(index, 1)" />
-    <button @click="foregroundColors.push('#fff')">new color</button>
+    <div class="block">
+      <h2 class="title is-4 mb-2 mt-4">Foregrounds</h2>
+      <div class="button-row block">
+        <ColorButton
+          v-for="(color, index) in foregroundColors"
+          :key="index"
+          :modelValue="foregroundColors[index]"
+          @update:modelValue="(x) => (foregroundColors[index] = x)"
+          @delete="foregroundColors.splice(index, 1)" />
+        <button
+          class="new-color button"
+          @click="foregroundColors.push('#000000')">
+          +
+        </button>
+      </div>
+    </div>
   </div>
 
-  <div class="box">
+  <div class="block">
     <div class="color-grid">
       <template v-for="(background, index) in backgroundColors" :key="index">
-        {{ background }}
-      </template>
-      <template v-for="(foreground, index) in foregroundColors" :key="index">
-        {{ foreground }}
-        <template v-for="(background, index) in backgroundColors" :key="index">
-          <ColorBox
-            :background="background"
-            :foreground="foreground"
-            :options="options" />
-        </template>
+        <div class="color-grid-row">
+          <template
+            v-for="(foreground, index) in foregroundColors"
+            :key="index">
+            <ColorBox
+              :background="background"
+              :foreground="foreground"
+              :options="options" />
+          </template>
+        </div>
       </template>
     </div>
   </div>
 </template>
+
+<style>
+.color-grid-row {
+  display: grid;
+  grid-auto-flow: column;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+}
+
+.button-row {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.button-row .new-color {
+  height: 8ch;
+  width: 8ch;
+}
+
+.display-options {
+  display: flex;
+  flex-direction: column;
+  justify-items: start;
+}
+
+.display-options .checkbox {
+  max-width: 30ch;
+}
+</style>

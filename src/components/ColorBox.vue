@@ -91,17 +91,17 @@ const shadowClass = computed(() => {
 }
 
 .shadow-green {
-  box-shadow: 0px 0px 10px green;
+  box-shadow: 3px 3px 16px -4px green;
   border-color: green;
 }
 
 .shadow-orange {
-  box-shadow: 0px 0px 10px orange;
+  box-shadow: 3px 3px 16px -4px orange;
   border-color: orange;
 }
 
 .shadow-red {
-  box-shadow: 0px 0px 10px red;
+  box-shadow: 3px 3px 16px -4px red;
   border-color: red;
 }
 

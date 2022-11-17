@@ -4,6 +4,7 @@ import ColorBox from "./components/ColorBox.vue";
 import ColorButton from "./components/ColorButton.vue";
 import NewColor from "./components/NewColor.vue";
 import { reactive } from "vue";
+import ColorHeader from "./components/ColorHeader.vue";
 
 const foregroundColors = useStorage("foregroundColors", [
   "#900498",
@@ -89,17 +90,17 @@ const options = useStorage(
   </div>
 
   <div class="block">
-    <h2 class="title is-4 mb-2 mt-4">Result Matrix</h2>
+    <h2 class="title is-4 mb-5 mt-4">Result Matrix</h2>
     <div class="color-grid">
-      <div class="color-grid-row has-text-centered is-uppercase">
+      <div class="color-grid-row">
         <span />
         <template v-for="(foreground, index) in foregroundColors" :key="index">
-          <span>{{ foreground }}</span>
+          <ColorHeader :color="foreground" />
         </template>
       </div>
       <template v-for="(background, index) in backgroundColors" :key="index">
         <div class="color-grid-row">
-          <span class="has-text-centered is-uppercase"> {{ background }} </span>
+          <ColorHeader :color="background" />
           <template
             v-for="(foreground, index) in foregroundColors"
             :key="index">

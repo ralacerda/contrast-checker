@@ -1,61 +1,61 @@
 <script setup>
 import { hex } from "wcag-contrast";
+import { computed } from "vue";
 
 const props = defineProps(["background", "foreground", "options"]);
 
-function contrastTest(contrast) {
+const contrastValue = computed(() => hex(props.background, props.foreground));
+
+const contrastTest = computed(() => {
+  let passThreshold = 4.5;
+  let largeTextThreshold = 3;
+
   if (props.options.enhancedContrast) {
-    return contrast > 7 ? "Pass" : contrast > 4.5 ? "Large Text" : "Fail";
-  } else {
-    return contrast > 4.5 ? "Pass" : contrast > 3 ? "Large Text" : "Fail";
+    passThreshold = 7;
+    largeTextThreshold = 4.5;
   }
-}
 
-function shadowColor(contrastResult) {
-  if (!props.options.showShadows) {
-    return "0px 0px 20px #00000020";
-  }
-  switch (contrastResult) {
-    case "Pass":
-      return "0px 0px 10px green";
-    case "Large Text":
-      return "0px 0px 10px orange";
-    case "Fail":
-      return "0px 0px 10px red";
-  }
-}
-
-function borderStyle(contrastResult) {
-  if (!props.options.showBorders || contrastResult == "Pass") {
-    return "solid";
+  if (contrastValue.value > passThreshold) {
+    return "Pass";
+  } else if (contrastValue.value > largeTextThreshold) {
+    return "Large Text";
   } else {
-    return contrastResult == "Large Text" ? "dashed" : "dotted";
+    return "Fail";
   }
-}
+});
 
-function borderColor(contrastResult) {
-  if (!props.options.showShadows) {
-    return "black";
+const borderClass = computed(() => {
+  if (!props.options.showBorders) return;
+
+  if (contrastTest.value == "Pass") {
+    return;
+  } else if (contrastTest.value == "Large Text") {
+    return "border-large";
   } else {
-    switch (contrastResult) {
-      case "Pass":
-        return "green";
-      case "Large Text":
-        return "orange";
-      case "Fail":
-        return "red";
-    }
+    return "border-fail";
   }
-}
+});
+
+const shadowClass = computed(() => {
+  if (!props.options.showShadows) return;
+
+  if (contrastTest.value == "Pass") {
+    return "shadow-green";
+  } else if (contrastTest.value == "Large Text") {
+    return "shadow-orange";
+  } else {
+    return "shadow-red";
+  }
+});
 </script>
 
 <template>
-  <div class="box-wrapper">
+  <div class="box-wrapper" :class="[shadowClass, borderClass]">
     <div class="color-box" :class="{ 'color-preview': options.showPreview }">
-      {{ hex(background, foreground).toFixed(2) }}
+      {{ contrastValue.toFixed(2) }}
     </div>
     <div v-if="options.showText">
-      {{ contrastTest(hex(background, foreground)) }}
+      {{ contrastTest }}
     </div>
   </div>
 </template>
@@ -64,17 +64,11 @@ function borderColor(contrastResult) {
 .box-wrapper {
   display: grid;
   place-items: center;
-  border-width: 1px;
-  border-style: v-bind(
-    "borderStyle(contrastTest(hex(background, foreground)))"
-  );
-  border-color: v-bind(
-    "borderColor(contrastTest(hex(background, foreground)))"
-  );
+  border: solid 1px gray;
   border-radius: 4px;
   margin: 10px;
   padding: 6px;
-  box-shadow: v-bind("shadowColor(contrastTest(hex(background, foreground)))");
+  box-shadow: 0px 0px 20px #00000020;
 }
 
 .color-box {
@@ -84,6 +78,31 @@ function borderColor(contrastResult) {
   height: 60px;
   width: 60px;
   border-radius: 6px;
+}
+
+.border-fail {
+  border-style: dashed;
+  border-color: lightgray;
+}
+
+.border-large {
+  border-style: dotted;
+  border-color: black;
+}
+
+.shadow-green {
+  box-shadow: 0px 0px 10px green;
+  border-color: green;
+}
+
+.shadow-orange {
+  box-shadow: 0px 0px 10px orange;
+  border-color: orange;
+}
+
+.shadow-red {
+  box-shadow: 0px 0px 10px red;
+  border-color: red;
 }
 
 .color-preview {

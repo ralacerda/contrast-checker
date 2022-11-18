@@ -35,6 +35,13 @@ const options = useStorage(
   <div class="block">
     <h1 class="title is-1">Multiple Colors Contrast Checker</h1>
 
+    <p class="content">
+      This application helps your check if yours colors meet the
+      <a href="https://webaim.org/articles/contrast/"
+        >WCAG standard for color contrast</a
+      >.
+    </p>
+
     <div class="block display-options">
       <label class="checkbox">
         <input type="checkbox" v-model="options.showShadows" />

@@ -98,36 +98,32 @@ const options = useStorage(
 
   <div class="block">
     <h2 class="">Result Matrix</h2>
-    <div class="color-grid">
-      <div class="color-grid-row">
-        <span />
-        <template v-for="(foreground, index) in foregroundColors" :key="index">
-          <ColorHeader :color="foreground" />
-        </template>
-      </div>
+    <div
+      class="color-grid"
+      :style="{ '--columns': foregroundColors.length + 1 }">
+      <span />
+      <template v-for="(foreground, index) in foregroundColors" :key="index">
+        <ColorHeader :color="foreground" />
+      </template>
       <template v-for="(background, index) in backgroundColors" :key="index">
-        <div class="color-grid-row">
-          <ColorHeader :color="background" />
-          <template
-            v-for="(foreground, index) in foregroundColors"
-            :key="index">
-            <ColorBox
-              :background="background"
-              :foreground="foreground"
-              :options="options" />
-          </template>
-        </div>
+        <ColorHeader :color="background" />
+        <template v-for="(foreground, index) in foregroundColors" :key="index">
+          <ColorBox
+            :background="background"
+            :foreground="foreground"
+            :options="options" />
+        </template>
       </template>
     </div>
   </div>
 </template>
 
 <style>
-.color-grid-row {
+.color-grid {
   display: grid;
-  grid-auto-flow: column;
   align-items: center;
-  grid-template-columns: repeat(auto-fill, 120px);
+  grid-template-columns: repeat(var(--columns), 120px);
+  overflow-x: auto;
 }
 
 .button-row {

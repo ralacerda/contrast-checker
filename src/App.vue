@@ -33,7 +33,7 @@ const options = useStorage(
 
 <template>
   <div class="block">
-    <h1 class="title is-1">Multiple Colors Contrast Checker</h1>
+    <h1 class="">Multiple Colors Contrast Checker</h1>
 
     <p class="content">
       This application helps your check if yours colors meet the
@@ -72,7 +72,7 @@ const options = useStorage(
 
   <div class="block">
     <div class="block">
-      <h2 class="title is-4 mb-2 mt-4">Backgrounds</h2>
+      <h2 class="">Backgrounds</h2>
       <div class="button-row block">
         <ColorButton
           v-for="(color, index) in backgroundColors"
@@ -84,7 +84,7 @@ const options = useStorage(
     </div>
 
     <div class="block">
-      <h2 class="title is-4 mb-2 mt-4">Foregrounds</h2>
+      <h2 class="">Foregrounds</h2>
       <div class="button-row block">
         <ColorButton
           v-for="(color, index) in foregroundColors"
@@ -97,7 +97,7 @@ const options = useStorage(
   </div>
 
   <div class="block">
-    <h2 class="title is-4 mb-5 mt-4">Result Matrix</h2>
+    <h2 class="">Result Matrix</h2>
     <div class="color-grid">
       <div class="color-grid-row">
         <span />
@@ -127,7 +127,7 @@ const options = useStorage(
   display: grid;
   grid-auto-flow: column;
   align-items: center;
-  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  grid-template-columns: repeat(auto-fill, 120px);
 }
 
 .button-row {

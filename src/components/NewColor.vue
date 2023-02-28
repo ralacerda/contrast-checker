@@ -5,7 +5,7 @@ defineEmits(["click"]);
 </script>
 
 <template>
-  <button class="new-color button" @click="$emit('click')">
+  <button class="new-color" @click="$emit('click')">
     <plus-color style="font-size: 2em; opacity: 0.2" />
   </button>
 </template>

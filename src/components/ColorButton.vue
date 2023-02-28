@@ -8,7 +8,6 @@ defineEmits(["update:modelValue", "delete"]);
 <template>
   <div class="color-button">
     <input
-      class="input is-uppercase has-text-centered is-small"
       :value="modelValue"
       @input="$emit('update:modelValue', $event.target.value)" />
 
@@ -18,11 +17,7 @@ defineEmits(["update:modelValue", "delete"]);
       disable-text-inputs
       format="hex string" />
 
-    <button
-      class="button is-small is-light is-danger delete-button"
-      @click="$emit('delete')">
-      Delete
-    </button>
+    <button @click="$emit('delete')">Delete</button>
   </div>
 </template>
 

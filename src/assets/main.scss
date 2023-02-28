@@ -1,20 +1,4 @@
-@import "../../node_modules/bulma/bulma.sass";
-
-// We need to remove Bulma styling for this box.
-// It's part of the color pick and not a Bulma component
-.color-input .box {
-  background-color: unset;
-  box-shadow: unset;
-  color: unset;
-  padding: unset;
-  margin-bottom: 0;
-}
-
-label {
-  user-select: none;
-}
-
-#app {
+body {
   background-color: #fafafa;
   min-height: 100vh;
 }

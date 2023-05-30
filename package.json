@@ -11,5 +11,10 @@
   "devDependencies": {
     "@types/node": "^18",
     "nuxt": "^3.5.2"
+  },
+  "dependencies": {
+    "@vueuse/core": "^10.1.2",
+    "vue-color-input": "^1.0.8",
+    "wcag-contrast": "^3.0.0"
   }
 }

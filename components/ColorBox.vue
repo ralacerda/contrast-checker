@@ -10,10 +10,10 @@ const contrastTest = computed(() => {
   let passThreshold = 4.5;
   let largeTextThreshold = 3;
 
-  if (props.options.enhancedContrast) {
-    passThreshold = 7;
-    largeTextThreshold = 4.5;
-  }
+  // if (props.options.enhancedContrast) {
+  //   passThreshold = 7;
+  //   largeTextThreshold = 4.5;
+  // }
 
   if (contrastValue.value > passThreshold) {
     return "Pass";
@@ -25,7 +25,7 @@ const contrastTest = computed(() => {
 });
 
 const borderClass = computed(() => {
-  if (!props.options.showBorders) return;
+  // if (!props.options.showBorders) return;
 
   if (contrastTest.value == "Pass") {
     return;
@@ -37,7 +37,7 @@ const borderClass = computed(() => {
 });
 
 const shadowClass = computed(() => {
-  if (!props.options.showShadows) return;
+  // if (!props.options.showShadows) return;
 
   if (contrastTest.value == "Pass") {
     return "shadow-green";
@@ -51,12 +51,12 @@ const shadowClass = computed(() => {
 
 <template>
   <div class="box-wrapper" :class="[shadowClass, borderClass]">
-    <div class="color-box" :class="{ 'color-preview': options.showPreview }">
+    <div class="color-box color-preview">
       {{ contrastValue.toFixed(2) }}
     </div>
-    <div v-if="options.showText">
-      {{ contrastTest }}
-    </div>
+    <!-- <div v-if="options.showText"> -->
+    {{ contrastTest }}
+    <!-- </div> -->
   </div>
 </template>
 

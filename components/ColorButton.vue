@@ -1,27 +1,30 @@
 <script setup>
 import ColorInput from "vue-color-input";
 
-defineProps(["modelValue"]);
-defineEmits(["update:modelValue", "delete"]);
+const modelValue = defineModel();
+defineEmits(["delete", "clone"]);
 </script>
 
 <template>
   <div class="color-button">
     <input
       class="input is-uppercase has-text-centered is-small"
-      :value="modelValue"
-      @input="$emit('update:modelValue', $event.target.value)" />
+      v-model="modelValue"
+    />
 
-    <ColorInput
-      :modelValue="modelValue"
-      @update:modelValue="(x) => $emit('update:modelValue', x)"
-      disable-text-inputs
-      format="hex string" />
+    <ColorInput v-model="modelValue" disable-text-inputs format="hex string" />
 
     <button
       class="button is-small is-light is-danger delete-button"
-      @click="$emit('delete')">
+      @click="$emit('delete')"
+    >
       Delete
+    </button>
+    <button
+      class="button is-small is-light is-danger delete-button"
+      @click="$emit('clone')"
+    >
+      Clone
     </button>
   </div>
 </template>

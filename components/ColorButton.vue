@@ -1,8 +1,11 @@
 <script setup>
 import ColorInput from "vue-color-input";
+import { useClipboard } from "@vueuse/core";
 
 const modelValue = defineModel();
 defineEmits(["delete", "clone"]);
+
+const { copy: copyToClipboard } = useClipboard();
 </script>
 
 <template>
@@ -25,6 +28,12 @@ defineEmits(["delete", "clone"]);
       @click="$emit('clone')"
     >
       Clone
+    </button>
+    <button
+      class="button is-small is-light is-danger delete-button"
+      @click="copyToClipboard(modelValue.toUpperCase())"
+    >
+      Copy
     </button>
   </div>
 </template>
@@ -66,5 +75,6 @@ defineEmits(["delete", "clone"]);
   background-color: unset;
   line-height: 1.2;
   height: 1.5rem;
+  text-transform: uppercase;
 }
 </style>

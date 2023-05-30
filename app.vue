@@ -1,15 +1,5 @@
 <script setup lang="ts">
-import { useStorage } from "@vueuse/core";
-
-const foregroundColors = useColorCollection("foregroundColors", [
-  "#900498",
-  "#02513c",
-]);
-const backgroundColors = useColorCollection("backgroundColors", [
-  "#eeeeee",
-  "#e5ebec",
-  "#161414",
-]);
+import { useClipboard, useStorage } from "@vueuse/core";
 
 const options = useStorage(
   "options",
@@ -21,27 +11,20 @@ const options = useStorage(
     enhancedContrast: false,
   })
 );
-const colorBackground = ref("#E4E4E4");
-const colorForeground = ref("#DD2020");
+
+const collection = useColorCollection();
 </script>
 
 <template>
   <div>
-    <!-- <div v-for="index in foregroundColors.length" :key="index">
-      <ColorButton v-model="foregroundColors[index - 1]" />
-    </div> -->
+    <button @click="collection.resetAll">Reset</button>
+    <button @click="collection.swap()">Swap</button>
 
-    <button
-      @click="backgroundColors.colors.value = ['#eeeeee', '#e5ebec', '#161414']"
-    >
-      Reset
-    </button>
-
-    <ColorPickerRow :colorCollection="foregroundColors" />
-    <ColorPickerRow :colorCollection="backgroundColors" />
-
-    <!-- <ColorBox :background="colorBackground" :foreground="colorForeground" /> -->
+    <ColorPickerRow rowName="foreground" />
+    <ColorPickerRow rowName="background" />
   </div>
+
+  <div></div>
 </template>
 
 <style>

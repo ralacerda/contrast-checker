@@ -3,6 +3,9 @@ import "./node_modules/bulma/bulma.sass";
 </script>
 
 <template>
+  <Head>
+    <Title>Multiple Colors Contrast Checker</Title>
+  </Head>
   <div class="container is-fullhd box">
     <div class="block">
       <TopPanel />

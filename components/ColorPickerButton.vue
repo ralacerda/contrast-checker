@@ -6,6 +6,8 @@ const modelValue = defineModel();
 defineEmits(["delete", "clone"]);
 
 const { copy: copyToClipboard } = useClipboard();
+
+const hover = ref("false");
 </script>
 
 <template>
@@ -17,38 +19,44 @@ const { copy: copyToClipboard } = useClipboard();
 
     <ColorInput v-model="modelValue" disable-text-inputs format="hex string" />
 
-    <button
-      class="button is-small is-light is-danger delete-button"
-      @click="$emit('delete')"
-    >
-      Delete
-    </button>
-    <button
-      class="button is-small is-light is-danger delete-button"
-      @click="$emit('clone')"
-    >
-      Clone
-    </button>
-    <button
-      class="button is-small is-light is-danger delete-button"
-      @click="copyToClipboard(modelValue.toUpperCase())"
-    >
-      Copy
-    </button>
+    <div class="button-row">
+      <button
+        class="button is-small"
+        @click="copyToClipboard(modelValue.toUpperCase())"
+      >
+        <Icon name="mdi:content-copy" color="#707070" />
+      </button>
+      <button class="button is-small" @click="$emit('clone')">
+        <Icon name="mdi:content-duplicate" color="#707070" />
+      </button>
+      <button class="button is-small" @click="$emit('delete')">
+        <Icon name="mdi:trash" color="#707070" />
+      </button>
+    </div>
   </div>
 </template>
 
 <style>
-.delete-button {
-  width: 100%;
+.color-button {
+  max-width: 10ch;
 }
 
-.color-button {
-  max-width: 8ch;
+.color-button button.button {
+  width: 100%;
+  border: 1px solid #00000010;
+  background: transparent;
+}
+
+.color-button button.button:hover {
+  background-color: #00000015;
+}
+
+.button-row {
+  display: flex;
 }
 
 .color-input {
-  height: 8ch;
+  aspect-ratio: 1;
   width: 100%;
 }
 
@@ -57,6 +65,11 @@ const { copy: copyToClipboard } = useClipboard();
   width: 100%;
   border-radius: 3px;
   position: relative;
+  background-color: unset;
+  box-shadow: unset;
+  color: unset;
+  padding: unset;
+  margin-bottom: 0;
 }
 
 .color-input .color::after {

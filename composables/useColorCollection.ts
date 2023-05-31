@@ -30,7 +30,11 @@ export default function () {
     getColors(key).value = values;
   }
 
-  function addColor(key: row, value: string) {
+  function addColor(key: row, value?: string) {
+    if (!value) {
+      rows[key].value.push(key == "foreground" ? "#000000" : "#FFFFFF");
+      return;
+    }
     rows[key].value.push(value);
   }
 
@@ -52,6 +56,7 @@ export default function () {
     cloneColor,
     setColors,
     resetAll,
+    addColor,
     swap,
     ...rows,
   };

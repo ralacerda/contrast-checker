@@ -12,14 +12,20 @@ const yAxis = computed(() =>
 </script>
 
 <template>
-  <div class="result-grid">
-    <button @click="inverted = !inverted">B</button>
-    <div v-for="column in xAxis">{{ column }}</div>
+  <GridResultOptions class="pt-5" />
+  <div class="result-grid pt-2">
+    <button @click="inverted = !inverted" class="button">
+      <Icon name="mdi:cached" color="#707070" />
+    </button>
+    <div class="color-code" v-for="column in xAxis">
+      <span :style="{ '--hex': column }" />
+      {{ column }}
+    </div>
 
     <template v-for="(row, rowIndex) in yAxis">
-      <div>{{ row }}</div>
+      <div class="color-code"><span :style="{ '--hex': row }" />{{ row }}</div>
       <template v-for="(column, columnIndex) in xAxis">
-        <ColorBox
+        <GridResultBox
           :foreground="foreground[inverted ? rowIndex : columnIndex]"
           :background="background[inverted ? columnIndex : rowIndex]"
         />
@@ -31,10 +37,30 @@ const yAxis = computed(() =>
 <style scoped>
 .result-grid {
   display: grid;
-  grid-template-columns: repeat(v-bind("xAxis.length + 1"), 120px);
+  grid-template-columns: 80px repeat(v-bind("xAxis.length"), 120px);
   align-items: center;
+  /* justify-items: center; */
   text-align: center;
   overflow-y: auto;
   gap: 1rem;
+}
+
+.color-code {
+  position: relative;
+  width: fit-content;
+  text-transform: uppercase;
+  margin-inline: auto;
+  display: flex;
+  align-items: center;
+  font-size: 0.75rem;
+  gap: 0.2rem;
+}
+
+.color-code span {
+  display: block;
+  height: 12px;
+  width: 12px;
+  border: solid 1px #333f4820;
+  background-color: var(--hex);
 }
 </style>

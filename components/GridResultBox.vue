@@ -41,7 +41,7 @@ const shadowClass = computed(() => {
 
 <template>
   <div class="box-wrapper" :class="shadowClass">
-    <div class="color-box color-preview">
+    <div class="color-box" :class="options.showPreview ? 'color-preview' : ''">
       {{ contrastValue.toFixed(2) }}
     </div>
     <div v-if="options.showText">

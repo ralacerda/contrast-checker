@@ -2,7 +2,9 @@
 import { hex } from "wcag-contrast";
 import { computed } from "vue";
 
-const props = defineProps(["background", "foreground", "options"]);
+const props = defineProps(["background", "foreground"]);
+
+const options = useOptions();
 
 const contrastValue = computed(() => hex(props.background, props.foreground));
 
@@ -10,10 +12,10 @@ const contrastTest = computed(() => {
   let passThreshold = 4.5;
   let largeTextThreshold = 3;
 
-  // if (props.options.enhancedContrast) {
-  //   passThreshold = 7;
-  //   largeTextThreshold = 4.5;
-  // }
+  if (options.value.enhancedContrast) {
+    passThreshold = 7;
+    largeTextThreshold = 4.5;
+  }
 
   if (contrastValue.value > passThreshold) {
     return "Pass";
@@ -24,20 +26,8 @@ const contrastTest = computed(() => {
   }
 });
 
-const borderClass = computed(() => {
-  // if (!props.options.showBorders) return;
-
-  if (contrastTest.value == "Pass") {
-    return;
-  } else if (contrastTest.value == "Large Text") {
-    return "border-large";
-  } else {
-    return "border-fail";
-  }
-});
-
 const shadowClass = computed(() => {
-  // if (!props.options.showShadows) return;
+  if (!options.value.showShadows) return;
 
   if (contrastTest.value == "Pass") {
     return "shadow-green";
@@ -50,13 +40,13 @@ const shadowClass = computed(() => {
 </script>
 
 <template>
-  <div class="box-wrapper" :class="[shadowClass, borderClass]">
+  <div class="box-wrapper" :class="shadowClass">
     <div class="color-box color-preview">
       {{ contrastValue.toFixed(2) }}
     </div>
-    <!-- <div v-if="options.showText"> -->
-    {{ contrastTest }}
-    <!-- </div> -->
+    <div v-if="options.showText">
+      {{ contrastTest }}
+    </div>
   </div>
 </template>
 
@@ -66,7 +56,6 @@ const shadowClass = computed(() => {
   place-items: center;
   border: solid 1px gray;
   border-radius: 4px;
-  margin: 10px;
   padding: 6px;
   box-shadow: 0px 0px 20px #00000020;
 }
@@ -78,16 +67,6 @@ const shadowClass = computed(() => {
   height: 60px;
   width: 60px;
   border-radius: 6px;
-}
-
-.border-fail {
-  border-style: dashed;
-  border-color: lightgray;
-}
-
-.border-large {
-  border-style: dotted;
-  border-color: black;
 }
 
 .shadow-green {

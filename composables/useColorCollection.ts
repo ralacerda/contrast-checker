@@ -46,5 +46,13 @@ export default function () {
     ];
   }
 
-  return { getColors, deleteAt, cloneColor, setColors, resetAll, swap };
+  return {
+    getColors,
+    deleteAt,
+    cloneColor,
+    setColors,
+    resetAll,
+    swap,
+    ...rows,
+  };
 }

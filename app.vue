@@ -11,6 +11,8 @@ const collection = useColorCollection();
 
     <ColorPickerRow rowName="foreground" />
     <ColorPickerRow rowName="background" />
+
+    <GridResult />
   </div>
 
   <div></div>

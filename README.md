@@ -1,5 +1,7 @@
 # Multiple Color Contrast Checker
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/1f59efd3-a78b-4f0a-853f-654ee1f40e65/deploy-status)](https://app.netlify.com/sites/multiple-contrast-checker/deploys)
+
 ## Overview
 
 The Multiple Color Contrast Checker is a web application designed to help you assess and verify color contrast according to the Web Content Accessibility Guidelines (WCAG). The app allows you to check the contrast between multiple foreground and background colors, providing a clear indication of whether the contrast ratios meet the WCAG standards.
